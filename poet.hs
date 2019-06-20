@@ -1,5 +1,11 @@
 import Data.List
 import Data.Maybe
+import System.Random
+
+getRandomElement :: [a] -> IO a
+getRandomElement l = do
+    i <- randomRIO (0, length l - 1)
+    return $ l !! i
 
 successor :: Eq a => [a] -> [a] -> Maybe a
 successor s (x:xs)
@@ -30,3 +36,21 @@ successors s [] sentinel = []
 successors s (x:xs) sentinel
   | isPrefixOf s (x:xs) = fromMaybe sentinel (successor s (x:xs)) : successors s xs sentinel
   | otherwise = successors s xs sentinel
+
+main = do
+
+  let wordlen = 3
+  text <- getContents
+
+  let word = take wordlen text
+
+  -- putStrLn "I got"
+  -- putStrLn content
+
+  putStrLn "I start with"
+  putStrLn word
+
+  let succs = successors word text '\ETX'
+  succ <- getRandomElement succs
+
+  putChar succ
