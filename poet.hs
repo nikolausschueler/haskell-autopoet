@@ -1,5 +1,6 @@
 import Data.List
 import Data.Maybe
+import System.Exit
 import System.Random
 
 getRandomElement :: [a] -> IO a
@@ -37,6 +38,13 @@ successors s (x:xs) sentinel
   | isPrefixOf s (x:xs) = fromMaybe sentinel (successor s (x:xs)) : successors s xs sentinel
   | otherwise = successors s xs sentinel
 
+scramble word text = do
+  let succs = successors word text '\ETX'
+  succ <- getRandomElement succs
+  putChar succ
+  if succ == '\ETX' then exitSuccess
+  else scramble (tail word ++ [succ]) text
+
 main = do
 
   let wordlen = 3
@@ -44,13 +52,6 @@ main = do
 
   let word = take wordlen text
 
-  -- putStrLn "I got"
-  -- putStrLn content
+  putStr word
 
-  putStrLn "I start with"
-  putStrLn word
-
-  let succs = successors word text '\ETX'
-  succ <- getRandomElement succs
-
-  putChar succ
+  scramble word text
