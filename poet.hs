@@ -1,7 +1,24 @@
 import Data.List
 import Data.Maybe
+import System.Console.GetOpt
+import System.Environment
 import System.Exit
 import System.Random
+
+data Options = Options { optWordlen :: Int }
+
+startOptions :: Options
+startOptions = Options { optWordlen = 3 }
+
+options :: [OptDescr (Options -> IO Options)]
+options =
+    [ Option "w" ["wordlen"]
+                 (ReqArg
+                  (\arg opt -> return opt { optWordlen = read arg :: Int })
+                  "WORD LENGTH")
+                 "" -- "Length of word use for matching"
+    ]
+
 
 getRandomElement :: [a] -> IO a
 getRandomElement l = do
@@ -47,7 +64,14 @@ scramble word text = do
 
 main = do
 
-  let wordlen = 3
+  args <- getArgs
+
+  let (actions, nonOptions, errors) = getOpt Permute options args
+
+  opts <- foldl (>>=) (return startOptions) actions
+
+  let Options { optWordlen = wordlen } = opts
+
   text <- getContents
 
   let word = take wordlen text
