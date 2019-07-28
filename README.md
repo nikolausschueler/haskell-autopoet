@@ -67,3 +67,16 @@ des, dann, dann, dann, das nichnet, dadurch in vorkommt. Es ist.
 ```
 
 Can you spot the difference?
+
+Options
+=======
+
+The program has options (currently one). You show help about the options with
+
+```
+$ ./poet -h
+```
+
+It took me a while to implement option handling. I mainly modelled it ("stole"
+is such a harsh word, so let's say "modelled") after this example:
+https://wiki.haskell.org/High-level_option_handling_with_GetOpt.
