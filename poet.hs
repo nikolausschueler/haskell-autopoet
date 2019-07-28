@@ -3,6 +3,7 @@ import Data.Maybe
 import System.Console.GetOpt
 import System.Environment
 import System.Exit
+import System.IO
 import System.Random
 
 data Options = Options { optWordlen :: Int }
@@ -17,6 +18,13 @@ options =
                   (\arg opt -> return opt { optWordlen = read arg :: Int })
                   "WORD LENGTH")
                  "" -- "Length of word use for matching"
+     , Option "h" ["help"]
+                 (NoArg
+                  (\_ -> do
+                    prg <- getProgName
+                    hPutStrLn stderr (usageInfo prg options)
+                    exitWith ExitSuccess))
+                  "Show help"
     ]
 
 
