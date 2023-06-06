@@ -18,11 +18,13 @@ this as my first Haskell program.
 Usage
 =====
 
-I use the Glasgow Haskell Compiler to compile. You can compile the program with:
-
+The program is managed with Cabal, so you can run it with
 ```
-$ ghc poet.hs
+$ cabal run haskell-autopoet -- < <filename>
 ```
+In case you don't yet use Cabal (you definitely should):
+How to get started with Cabal is described here:
+https://cabal.readthedocs.io/en/3.4/getting-started.html.
 
 An example
 ==========
