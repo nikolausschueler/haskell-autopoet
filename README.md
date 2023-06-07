@@ -18,10 +18,16 @@ this as my first Haskell program.
 Usage
 =====
 
-The program is managed with Cabal, so you can run it with
+The program is managed with Cabal, so you can run it inside the project
+directory with
+
 ```
 $ cabal run haskell-autopoet -- < <filename>
 ```
+
+After the double dash the arguments to the program are listed. It takes it's
+input from stdin, so we have to redirect a file for input.
+
 In case you don't yet use Cabal (you definitely should):
 How to get started with Cabal is described here:
 https://cabal.readthedocs.io/en/3.4/getting-started.html.
