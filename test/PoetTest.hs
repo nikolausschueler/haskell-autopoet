@@ -6,4 +6,5 @@ import Poet
 
 main = defaultMain $
   testCase "Simple test" $ do
-    scramble "abc" "abc"
+    assertEqual "Successor of substring of same lenght as text"
+      ['\ETX'] (successors "abc" "abc" '\ETX')
