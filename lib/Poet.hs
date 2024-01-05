@@ -40,10 +40,8 @@ successors s (x:xs) sentinel
   | isPrefixOf s (x:xs) = fromMaybe sentinel (successor s (x:xs)) : successors s xs sentinel
   | otherwise = successors s xs sentinel
 
-scramble word text = do
+scramble word text output = do
   let succs = successors word text '\ETX'
   succ <- getRandomElement succs
-  putChar succ
-  if succ == '\ETX' then exitSuccess
-  else scramble (tail word ++ [succ]) text
-
+  if succ == '\ETX' then return output
+  else scramble (tail word ++ [succ]) text (output ++ [succ])

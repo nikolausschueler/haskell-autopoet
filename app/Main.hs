@@ -38,4 +38,5 @@ main = do
   text <- getContents
   let word = take wordlen text
   putStr word
-  Poet.scramble word text
+  output <- Poet.scramble word text []
+  putStrLn output
