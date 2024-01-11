@@ -16,4 +16,12 @@ tests = testGroup "Tests"
     x <- scramble "abc" "abcabcabc" []
     assertEqual "Sequence length is multiple of three"
       0 (length x `mod` 3)
+  , testCase "Test scrambling" $ do
+    x <- scramble "abc" "abcdabceabc" []
+    assertEqual "Sequence length is multiple of four"
+      0 (length x `mod` 4)
+  , testCase "Test scrambling" $ do
+    x <- scramble "abc" "abcdabceabcf" []
+    assertEqual "Sequence length is multiple of four, rest is 1"
+      1 (length x `mod` 4)
   ]
