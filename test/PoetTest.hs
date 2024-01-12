@@ -8,10 +8,10 @@ main = defaultMain tests
 tests = testGroup "Tests"
   [ testCase "Simple test" $ do
     assertEqual "Successor of substring of same lenght as text"
-      ['\ETX'] (successors "abc" "abc" '\ETX')
+      [Nothing] (successors "abc" "abc")
   , testCase "Even simpler test" $ do
     assertEqual "Successor of substring of same lenght as text"
-      ['\ETX'] (successors "ab" "ab" '\ETX')
+      [Nothing] (successors "ab" "ab")
   , testCase "Test scrambling" $ do
     x <- scramble "abc" "abcabcabc" []
     assertEqual "Sequence length is multiple of three"
